@@ -1,58 +1,58 @@
 
 import React, { useState } from 'react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, Layers, Grid3x3, ListCheck, BookOpen, Star, LayoutDashboard } from "lucide-react";
+import { ChevronDown, MessageCircle, Phone, PhoneCall, Workflow, Bot, Zap } from "lucide-react";
 
 const Features = () => {
   const [openFeature, setOpenFeature] = useState<number | null>(null);
   
   const features = [
     {
-      title: "Payment Automation",
-      description: "Automate payment processing and reconciliation to reduce manual errors and improve efficiency.",
-      expandedDescription: "Set up automated payment workflows with custom approval chains. Schedule recurring payments, automate invoice processing, and create conditional rules for different transaction types. Reduce manual intervention and ensure compliance with financial regulations.",
+      title: "Custom Chatbots",
+      description: "Build intelligent conversational AI that understands your business and helps customers 24/7.",
+      expandedDescription: "Deploy sophisticated chatbots across your website, WhatsApp, and social media platforms. Our AI-powered chatbots handle customer inquiries, lead qualification, appointment booking, and sales support with human-like conversations that improve customer satisfaction and reduce operational costs.",
       icon: (
-        <Layers size={24} className="text-cosmic-accent" />
+        <MessageCircle size={24} className="text-cosmic-accent" />
       )
     },
     {
-      title: "Real-time Analytics",
-      description: "Monitor financial performance with real-time dashboards and comprehensive reporting.",
-      expandedDescription: "Track key financial metrics with customizable dashboards. Monitor cash flow, payment volumes, and transaction success rates in real-time. Generate detailed reports for stakeholders and identify trends before they impact your business.",
+      title: "Inbound Voice Agents",
+      description: "AI-powered phone assistants that handle incoming calls with natural conversation.",
+      expandedDescription: "Replace traditional phone systems with intelligent voice agents that can answer customer questions, schedule appointments, take orders, and provide support. Our voice AI understands context, handles complex requests, and seamlessly transfers to human agents when needed.",
       icon: (
-        <Grid3x3 size={24} className="text-cosmic-accent" />
+        <Phone size={24} className="text-cosmic-accent" />
       )
     },
     {
-      title: "Risk Management",
-      description: "Advanced fraud detection and risk assessment tools to protect your business.",
-      expandedDescription: "Utilize machine learning algorithms to detect suspicious transactions and prevent fraud. Set up custom risk rules, monitor transaction patterns, and receive instant alerts for unusual activity. Protect your business with enterprise-grade security measures.",
+      title: "Outbound Voice Agents",
+      description: "Automated calling systems for sales, follow-ups, and customer outreach campaigns.",
+      expandedDescription: "Scale your outreach with AI voice agents that make personalized calls for lead generation, appointment setting, customer surveys, and follow-up campaigns. Increase conversion rates while reducing manual calling efforts and costs.",
       icon: (
-        <LayoutDashboard size={24} className="text-cosmic-accent" />
+        <PhoneCall size={24} className="text-cosmic-accent" />
       )
     },
     {
-      title: "Compliance Tools",
-      description: "Built-in compliance features to meet regulatory requirements effortlessly.",
-      expandedDescription: "Stay compliant with financial regulations across multiple jurisdictions. Automated KYC/AML checks, transaction monitoring, and regulatory reporting. Generate audit trails and maintain documentation to meet compliance standards.",
+      title: "AI Automation Workflows",
+      description: "End-to-end business process automation powered by artificial intelligence.",
+      expandedDescription: "Streamline your operations with custom AI workflows that automate repetitive tasks, data processing, email responses, document generation, and complex multi-step processes. Connect your existing tools and systems for seamless automation.",
       icon: (
-        <ListCheck size={24} className="text-cosmic-accent" />
+        <Workflow size={24} className="text-cosmic-accent" />
       )
     },
     {
-      title: "Multi-currency Support",
-      description: "Process payments in multiple currencies with real-time exchange rates.",
-      expandedDescription: "Accept and process payments in over 150 currencies with competitive exchange rates. Automatic currency conversion, hedging tools, and multi-currency accounting. Expand your business globally with seamless international payment processing.",
+      title: "AI Content Generation",
+      description: "Automated content creation for marketing, social media, and customer communications.",
+      expandedDescription: "Generate high-quality content at scale including blog posts, social media content, email campaigns, product descriptions, and personalized customer communications. Our AI adapts to your brand voice and maintains consistency across all channels.",
       icon: (
-        <Star size={24} className="text-cosmic-accent" />
+        <Bot size={24} className="text-cosmic-accent" />
       )
     },
     {
-      title: "API Integration",
-      description: "Powerful APIs for seamless integration with your existing financial systems.",
-      expandedDescription: "Connect with your ERP, accounting software, and banking systems through our comprehensive APIs. Real-time webhooks, detailed documentation, and SDKs for popular programming languages. Build custom integrations that fit your unique business needs.",
+      title: "Process Optimization",
+      description: "AI-driven analysis and optimization of your existing business processes.",
+      expandedDescription: "Identify bottlenecks and inefficiencies in your current workflows. Our AI analyzes your operations and provides actionable insights to optimize processes, reduce costs, and improve productivity through intelligent automation solutions.",
       icon: (
-        <BookOpen size={24} className="text-cosmic-accent" />
+        <Zap size={24} className="text-cosmic-accent" />
       )
     }
   ];
@@ -66,10 +66,10 @@ const Features = () => {
       <div className="max-w-7xl mx-auto space-y-12">
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-medium tracking-tighter">
-            Everything your business needs
+            What we can offer you
           </h2>
           <p className="text-cosmic-muted text-lg">
-            Comprehensive fintech solutions to streamline your financial operations and drive growth
+            Transform your business with cutting-edge AI automation solutions designed to scale your operations
           </p>
         </div>
         
