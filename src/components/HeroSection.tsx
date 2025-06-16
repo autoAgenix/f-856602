@@ -15,7 +15,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full py-12 md:py-20 px-6 md:px-12 flex flex-col items-center justify-center overflow-hidden bg-background">
+    <section id="home" className="relative w-full py-12 md:py-20 px-6 md:px-12 flex flex-col items-center justify-center overflow-hidden bg-background">
       {/* Cosmic particle effect (background dots) */}
       <div className="absolute inset-0 cosmic-grid opacity-30"></div>
       
@@ -28,30 +28,31 @@ const HeroSection = () => {
         <div className="flex justify-center">
           <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium rounded-full bg-muted text-primary">
             <span className="flex h-2 w-2 rounded-full bg-primary"></span>
-            Launching new payment features
+            AI-Powered Business Automation
             <Loader className="h-3 w-3 animate-spin text-primary" />
           </span>
         </div>
         
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tighter text-balance text-foreground">
-          Financial operations for <span className="text-primary">growth</span> businesses
+          Scale your business with <span className="text-primary">AI automation</span>
         </h1>
         
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-balance">
-          Streamline your financial workflows with our comprehensive fintech platform. Built for modern businesses who value efficiency, compliance, and scalable growth.
+          Transform your operations with intelligent chatbots, voice agents, and automated workflows. 
+          Let AI handle the routine while you focus on growth.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6 items-center">
           <Button className="bg-primary text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground text-base h-12 px-8 transition-all duration-200 min-h-[48px]">
-            Start for free
+            Get Started Today
           </Button>
           <Button variant="outline" className="border-border text-foreground hover:bg-accent hover:text-accent-foreground text-base h-12 px-8 transition-all duration-200 min-h-[48px]">
-            Book a demo
+            See How It Works
           </Button>
         </div>
         
         <div className="pt-6 text-sm text-muted-foreground">
-          No credit card required • Free 14-day trial
+          No setup fees • Custom solutions • 24/7 support
         </div>
       </div>
     </section>
