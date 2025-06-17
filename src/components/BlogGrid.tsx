@@ -1,7 +1,9 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { useBlogs } from '@/hooks/useBlogs';
 
 interface BlogGridProps {
   searchQuery: string;
@@ -10,69 +12,23 @@ interface BlogGridProps {
   setCurrentPage: (page: number) => void;
 }
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "10 Ways AI Chatbots Can Transform Your Customer Service",
-    excerpt: "Discover practical strategies for implementing AI chatbots that actually improve customer satisfaction and reduce support costs.",
-    image: "/placeholder.svg",
-    category: "chatbots",
-    readTime: "8 min read",
-    publishDate: "2025-01-10"
-  },
-  {
-    id: 2,
-    title: "Voice AI Implementation: A Complete Guide",
-    excerpt: "Learn how to successfully integrate voice AI into your business operations with real-world examples and best practices.",
-    image: "/placeholder.svg",
-    category: "voice-ai",
-    readTime: "12 min read",
-    publishDate: "2025-01-08"
-  },
-  {
-    id: 3,
-    title: "Automating Sales Workflows with AI",
-    excerpt: "Step-by-step guide to creating automated sales processes that increase conversion rates and save time.",
-    image: "/placeholder.svg",
-    category: "workflows",
-    readTime: "6 min read",
-    publishDate: "2025-01-05"
-  },
-  {
-    id: 4,
-    title: "Case Study: 300% ROI with AI Automation",
-    excerpt: "How one company achieved remarkable results by implementing our AI automation solutions across their operations.",
-    image: "/placeholder.svg",
-    category: "case-studies",
-    readTime: "10 min read",
-    publishDate: "2025-01-03"
-  },
-  {
-    id: 5,
-    title: "The Psychology Behind Effective Chatbot Design",
-    excerpt: "Understanding user behavior and designing conversational experiences that feel natural and helpful.",
-    image: "/placeholder.svg",
-    category: "chatbots",
-    readTime: "7 min read",
-    publishDate: "2025-01-01"
-  },
-  {
-    id: 6,
-    title: "Building Multi-Channel AI Workflows",
-    excerpt: "Create seamless automation that works across email, SMS, voice calls, and chat platforms.",
-    image: "/placeholder.svg",
-    category: "workflows",
-    readTime: "9 min read",
-    publishDate: "2024-12-28"
-  }
-];
-
 const POSTS_PER_PAGE = 6;
 
 const BlogGrid = ({ searchQuery, selectedCategory, currentPage, setCurrentPage }: BlogGridProps) => {
-  const filteredPosts = blogPosts.filter(post => {
+  const navigate = useNavigate();
+  const { data: blogs, isLoading } = useBlogs();
+
+  if (isLoading) {
+    return <div className="text-center py-12">Loading blogs...</div>;
+  }
+
+  if (!blogs) {
+    return <div className="text-center py-12">No blogs found.</div>;
+  }
+
+  const filteredPosts = blogs.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+                         (post.excerpt?.toLowerCase().includes(searchQuery.toLowerCase()) || false);
     const matchesCategory = selectedCategory === 'all' || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -81,14 +37,22 @@ const BlogGrid = ({ searchQuery, selectedCategory, currentPage, setCurrentPage }
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
   const paginatedPosts = filteredPosts.slice(startIndex, startIndex + POSTS_PER_PAGE);
 
+  const handlePostClick = (blogId: string) => {
+    navigate(`/blogs/${blogId}`);
+  };
+
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
         {paginatedPosts.map((post) => (
-          <Card key={post.id} className="cosmic-card h-full overflow-hidden group cursor-pointer hover:border-primary/30 transition-all duration-300">
+          <Card 
+            key={post.id} 
+            className="cosmic-card h-full overflow-hidden group cursor-pointer hover:border-primary/30 transition-all duration-300"
+            onClick={() => handlePostClick(post.id)}
+          >
             <div className="relative h-48 overflow-hidden">
               <img 
-                src={post.image} 
+                src={post.image_url || '/placeholder.svg'} 
                 alt={post.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
@@ -96,9 +60,9 @@ const BlogGrid = ({ searchQuery, selectedCategory, currentPage, setCurrentPage }
             <CardContent className="p-6">
               <div className="flex items-center gap-2 mb-3">
                 <span className="px-2 py-1 bg-muted text-muted-foreground text-xs rounded">
-                  {post.category.replace('-', ' ')}
+                  {post.category?.replace('-', ' ') || 'Article'}
                 </span>
-                <span className="text-xs text-muted-foreground">{post.readTime}</span>
+                <span className="text-xs text-muted-foreground">{post.read_time}</span>
               </div>
               <h3 className="text-lg font-medium text-foreground mb-3 group-hover:text-primary transition-colors">
                 {post.title}
@@ -107,7 +71,7 @@ const BlogGrid = ({ searchQuery, selectedCategory, currentPage, setCurrentPage }
                 {post.excerpt}
               </p>
               <div className="text-xs text-muted-foreground">
-                {new Date(post.publishDate).toLocaleDateString()}
+                {new Date(post.publish_date).toLocaleDateString()}
               </div>
             </CardContent>
           </Card>

@@ -1,42 +1,28 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { useBlogs } from '@/hooks/useBlogs';
 
 interface RelatedBlogsProps {
   currentBlogId: string;
 }
 
-const relatedPosts = [
-  {
-    id: '2',
-    title: 'Building Intelligent Chatbots That Actually Help',
-    excerpt: 'Learn the key principles behind creating chatbots that provide real value to your customers.',
-    image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=400&h=250&fit=crop',
-    category: 'Chatbots',
-    readTime: '6 min read'
-  },
-  {
-    id: '3',
-    title: 'Voice Agents: The Next Frontier in Customer Service',
-    excerpt: 'Explore how voice AI is revolutionizing customer interactions and creating new opportunities.',
-    image: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?w=400&h=250&fit=crop',
-    category: 'Voice AI',
-    readTime: '5 min read'
-  },
-  {
-    id: '4',
-    title: 'Workflow Automation: Streamlining Your Business Processes',
-    excerpt: 'Discover how to implement effective workflow automation to boost productivity.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=250&fit=crop',
-    category: 'Workflows',
-    readTime: '7 min read'
-  }
-];
-
 const RelatedBlogs = ({ currentBlogId }: RelatedBlogsProps) => {
-  // Filter out the current blog post
-  const filteredPosts = relatedPosts.filter(post => post.id !== currentBlogId);
+  const navigate = useNavigate();
+  const { data: blogs } = useBlogs();
+
+  if (!blogs) return null;
+
+  // Filter out the current blog post and get 3 random related posts
+  const relatedPosts = blogs
+    .filter(post => post.id !== currentBlogId)
+    .slice(0, 3);
+
+  const handlePostClick = (blogId: string) => {
+    navigate(`/blogs/${blogId}`);
+  };
 
   return (
     <section className="w-full py-16 px-6 md:px-12 bg-muted/30">
@@ -51,17 +37,21 @@ const RelatedBlogs = ({ currentBlogId }: RelatedBlogsProps) => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.map((post) => (
-            <Card key={post.id} className="cosmic-card h-full overflow-hidden group cursor-pointer hover:border-primary/30 transition-all duration-300">
+          {relatedPosts.map((post) => (
+            <Card 
+              key={post.id} 
+              className="cosmic-card h-full overflow-hidden group cursor-pointer hover:border-primary/30 transition-all duration-300"
+              onClick={() => handlePostClick(post.id)}
+            >
               <div className="relative h-48 overflow-hidden">
                 <img 
-                  src={post.image} 
+                  src={post.image_url || '/placeholder.svg'} 
                   alt={post.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-4 left-4">
                   <Badge className="bg-primary text-primary-foreground">
-                    {post.category}
+                    {post.category || 'Article'}
                   </Badge>
                 </div>
               </div>
@@ -73,7 +63,7 @@ const RelatedBlogs = ({ currentBlogId }: RelatedBlogsProps) => {
                   {post.excerpt}
                 </p>
                 <div className="text-sm text-muted-foreground">
-                  {post.readTime}
+                  {post.read_time}
                 </div>
               </CardContent>
             </Card>
