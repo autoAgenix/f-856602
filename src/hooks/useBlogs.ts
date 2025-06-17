@@ -13,6 +13,11 @@ export interface Blog {
   read_time: string | null;
   publish_date: string;
   author: string | null;
+  views: number | null;
+  likes: number | null;
+  shares: number | null;
+  comments: number | null;
+  table_of_contents: any[] | null;
   created_at: string;
   updated_at: string;
 }

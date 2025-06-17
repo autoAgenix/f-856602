@@ -63,7 +63,16 @@ const BlogPost = () => {
               <BlogPostContent content={blogPost.content} />
             </div>
             <div className="lg:col-span-3">
-              <BlogPostSidebar />
+              <BlogPostSidebar 
+                currentBlog={{
+                  id: blogPost.id,
+                  views: blogPost.views,
+                  likes: blogPost.likes,
+                  shares: blogPost.shares,
+                  comments: blogPost.comments,
+                  table_of_contents: blogPost.table_of_contents
+                }}
+              />
             </div>
           </div>
         </div>

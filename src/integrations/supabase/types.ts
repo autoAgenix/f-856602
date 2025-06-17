@@ -13,44 +13,59 @@ export type Database = {
         Row: {
           author: string | null
           category: string | null
+          comments: number | null
           content: string
           created_at: string
           excerpt: string | null
           id: string
           image_url: string | null
+          likes: number | null
           publish_date: string
           read_time: string | null
+          shares: number | null
+          table_of_contents: Json | null
           tags: string[] | null
           title: string
           updated_at: string
+          views: number | null
         }
         Insert: {
           author?: string | null
           category?: string | null
+          comments?: number | null
           content: string
           created_at?: string
           excerpt?: string | null
           id?: string
           image_url?: string | null
+          likes?: number | null
           publish_date?: string
           read_time?: string | null
+          shares?: number | null
+          table_of_contents?: Json | null
           tags?: string[] | null
           title: string
           updated_at?: string
+          views?: number | null
         }
         Update: {
           author?: string | null
           category?: string | null
+          comments?: number | null
           content?: string
           created_at?: string
           excerpt?: string | null
           id?: string
           image_url?: string | null
+          likes?: number | null
           publish_date?: string
           read_time?: string | null
+          shares?: number | null
+          table_of_contents?: Json | null
           tags?: string[] | null
           title?: string
           updated_at?: string
+          views?: number | null
         }
         Relationships: []
       }

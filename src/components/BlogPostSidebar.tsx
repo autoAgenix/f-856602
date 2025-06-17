@@ -4,18 +4,55 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Share2, Bookmark, ThumbsUp, MessageCircle } from 'lucide-react';
+import { useBlogs } from '@/hooks/useBlogs';
 
-const BlogPostSidebar = () => {
-  const popularTags = [
-    'AI Automation', 'Chatbots', 'Voice AI', 'Workflows', 
-    'Machine Learning', 'Business Intelligence', 'RPA'
-  ];
+interface BlogPostSidebarProps {
+  currentBlog?: {
+    id: string;
+    views: number | null;
+    likes: number | null;
+    shares: number | null;
+    comments: number | null;
+    table_of_contents: any[] | null;
+  };
+}
 
-  const stats = [
-    { label: 'Views', value: '2.3K' },
-    { label: 'Likes', value: '156' },
-    { label: 'Shares', value: '23' },
-    { label: 'Comments', value: '12' }
+const BlogPostSidebar = ({ currentBlog }: BlogPostSidebarProps) => {
+  const { data: blogs } = useBlogs();
+  
+  // Get all unique tags from all blogs for popular tags
+  const popularTags = React.useMemo(() => {
+    if (!blogs) return [];
+    const allTags = blogs.flatMap(blog => blog.tags || []);
+    const tagCounts = allTags.reduce((acc, tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+    
+    return Object.entries(tagCounts)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 7)
+      .map(([tag]) => tag);
+  }, [blogs]);
+
+  const formatNumber = (num: number | null) => {
+    if (!num) return '0';
+    if (num >= 1000) {
+      return (num / 1000).toFixed(1) + 'K';
+    }
+    return num.toString();
+  };
+
+  const stats = currentBlog ? [
+    { label: 'Views', value: formatNumber(currentBlog.views) },
+    { label: 'Likes', value: formatNumber(currentBlog.likes) },
+    { label: 'Shares', value: formatNumber(currentBlog.shares) },
+    { label: 'Comments', value: formatNumber(currentBlog.comments) }
+  ] : [
+    { label: 'Views', value: '0' },
+    { label: 'Likes', value: '0' },
+    { label: 'Shares', value: '0' },
+    { label: 'Comments', value: '0' }
   ];
 
   return (
@@ -85,24 +122,39 @@ const BlogPostSidebar = () => {
         </CardHeader>
         <CardContent>
           <nav className="space-y-2">
-            <a href="#introduction" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-              Introduction
-            </a>
-            <a href="#understanding" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-              Understanding AI Automation
-            </a>
-            <a href="#benefits" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-              Key Benefits
-            </a>
-            <a href="#applications" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-              Real-World Applications
-            </a>
-            <a href="#future" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-              The Road Ahead
-            </a>
-            <a href="#conclusion" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
-              Conclusion
-            </a>
+            {currentBlog?.table_of_contents && currentBlog.table_of_contents.length > 0 ? (
+              currentBlog.table_of_contents.map((item: any, index: number) => (
+                <a 
+                  key={index}
+                  href={`#${item.id}`} 
+                  className="block text-sm text-muted-foreground hover:text-primary transition-colors"
+                  style={{ paddingLeft: `${(item.level - 1) * 8}px` }}
+                >
+                  {item.title}
+                </a>
+              ))
+            ) : (
+              <>
+                <a href="#introduction" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Introduction
+                </a>
+                <a href="#understanding" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Understanding AI Automation
+                </a>
+                <a href="#benefits" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Key Benefits
+                </a>
+                <a href="#applications" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Real-World Applications
+                </a>
+                <a href="#future" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                  The Road Ahead
+                </a>
+                <a href="#conclusion" className="block text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Conclusion
+                </a>
+              </>
+            )}
           </nav>
         </CardContent>
       </Card>
