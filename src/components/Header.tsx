@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
 import { Menu, X, Home, CircleDot, DollarSign, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
