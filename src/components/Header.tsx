@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import Logo from './Logo';
-import { Menu, X, Home, CircleDot, DollarSign, Sun, Moon } from 'lucide-react';
+import { Menu, X, Home, CircleDot, Puzzle, DollarSign, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Switch } from '@/components/ui/switch';
@@ -75,6 +76,16 @@ const Header = () => {
                 <CircleDot size={16} className="inline-block mr-1.5" /> Features
               </ToggleGroupItem>
               <ToggleGroupItem 
+                value="integrations" 
+                className={cn(
+                  "px-4 py-2 rounded-full transition-colors relative",
+                  activePage === 'integrations' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                )}
+                onClick={handleNavClick('integrations')}
+              >
+                <Puzzle size={16} className="inline-block mr-1.5" /> Integrations
+              </ToggleGroupItem>
+              <ToggleGroupItem 
                 value="costing" 
                 className={cn(
                   "px-4 py-2 rounded-full transition-colors relative",
@@ -109,6 +120,15 @@ const Header = () => {
                 onClick={handleNavClick('features')}
               >
                 <CircleDot size={16} className="inline-block mr-1.5" /> Features
+              </a>
+              <a 
+                href="#integrations" 
+                className={`px-3 py-2 text-sm rounded-md transition-colors ${
+                  activePage === 'integrations' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                }`}
+                onClick={handleNavClick('integrations')}
+              >
+                <Puzzle size={16} className="inline-block mr-1.5" /> Integrations
               </a>
               <a 
                 href="#costing" 
