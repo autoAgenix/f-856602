@@ -5,6 +5,7 @@ import HeroSection from '@/components/HeroSection';
 import Features from '@/components/Features';
 import Integrations from '@/components/Integrations';
 import Testimonials from '@/components/Testimonials';
+import BookingWidget from '@/components/BookingWidget';
 import CostEstimator from '@/components/CostEstimator';
 import Footer from '@/components/Footer';
 
@@ -19,6 +20,7 @@ const Index = () => {
           <Integrations />
         </div>
         <Testimonials />
+        <BookingWidget />
         <div id="costing">
           <CostEstimator />
         </div>
