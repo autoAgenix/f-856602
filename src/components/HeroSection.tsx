@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Loader } from 'lucide-react';
+import { BackgroundBeamsWithCollision } from './ui/background-beams-with-collision';
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -15,10 +16,10 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="home" className="relative w-full py-12 md:py-20 px-6 md:px-12 flex flex-col items-center justify-center overflow-hidden bg-background">
+    <section id="home" className="relative w-full -mt-20 h-screen px-6 md:px-12 flex flex-col items-center justify-center overflow-hidden bg-background">
       {/* Cosmic particle effect (background dots) */}
+      <BackgroundBeamsWithCollision>
       <div className="absolute inset-0 cosmic-grid opacity-30"></div>
-      
       {/* Gradient glow effect */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full">
         <div className="w-full h-full opacity-10 bg-primary blur-[120px]"></div>
@@ -55,6 +56,8 @@ const HeroSection = () => {
           No setup fees • Custom solutions • 24/7 support
         </div>
       </div>
+      </BackgroundBeamsWithCollision>
+
     </section>
   );
 };

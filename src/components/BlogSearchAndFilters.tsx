@@ -3,6 +3,7 @@ import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search } from 'lucide-react';
+import { PlaceholdersAndVanishInput } from './ui/placeholders-and-vanish-input';
 
 interface BlogSearchAndFiltersProps {
   searchQuery: string;
@@ -26,6 +27,14 @@ const BlogSearchAndFilters = ({
   selectedCategory, 
   setSelectedCategory 
 }: BlogSearchAndFiltersProps) => {
+
+  const placeholders = [
+    "What's the first rule of Fight Club?",
+    "Who is Tyler Durden?",
+    "Where is Andrew Laeddis Hiding?",
+    "Write a Javascript method to reverse a string",
+    "How to assemble your own PC?",
+  ];
   return (
     <div className="mb-12">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
@@ -35,8 +44,13 @@ const BlogSearchAndFilters = ({
             placeholder="Search articles..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 bg-card border-border"
+            className="pl-10 bg-card border-border rounded-full focus:ring-0 focus:border-primary text-sm sm:text-base h-10"
           />
+          {/* <PlaceholdersAndVanishInput
+            placeholders={placeholders}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            
+          /> */}
         </div>
         
         <div className="flex gap-4 items-center">

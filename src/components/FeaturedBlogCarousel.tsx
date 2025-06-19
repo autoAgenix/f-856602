@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Card, CardContent } from '@/components/ui/card';
 import { useBlogs } from '@/hooks/useBlogs';
+import { Loader } from 'lucide-react';
 
 const FeaturedBlogCarousel = () => {
   const navigate = useNavigate();
@@ -11,13 +12,13 @@ const FeaturedBlogCarousel = () => {
 
   if (isLoading) {
     return (
-      <section className="w-full py-12 px-6 md:px-12">
+      <section className="w-full h-screen pt-12  px-6 md:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">Featured Articles</h2>
             <p className="text-muted-foreground">Stay updated with the latest insights in AI automation</p>
           </div>
-          <div className="text-center">Loading...</div>
+          <Loader className="h-24 w-24 mt-48 animate-spin text-primary mx-auto" />
         </div>
       </section>
     );
