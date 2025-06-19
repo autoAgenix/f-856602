@@ -2,16 +2,29 @@
 import React from 'react';
 import { ArrowLeft, Sun, Moon } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 import Logo from './Logo';
 
 const BlogHeader = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { isDarkMode, toggleTheme } = useTheme();
 
   const handleBack = () => {
     navigate('/');
+  };
+
+  const getPageTitle = () => {
+    switch (location.pathname) {
+      case '/about':
+        return 'About';
+      case '/contact':
+        return 'Contact';
+      case '/blogs':
+      default:
+        return 'Blog';
+    }
   };
 
   return (
@@ -30,7 +43,7 @@ const BlogHeader = () => {
         </div>
 
         <nav className="hidden md:block">
-          <h1 className="text-xl font-medium text-foreground">Blog</h1>
+          <h1 className="text-xl font-medium text-foreground">{getPageTitle()}</h1>
         </nav>
 
         <div className="flex items-center gap-2 rounded-full px-3 py-2">

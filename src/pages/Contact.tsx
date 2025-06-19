@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import Header from '@/components/Header';
+import BlogHeader from '@/components/BlogHeader';
 import Footer from '@/components/Footer';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -79,7 +79,7 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <Header />
+      <BlogHeader />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="py-24 px-6 md:px-12 relative overflow-hidden">
