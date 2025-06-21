@@ -1,3 +1,4 @@
+import {  IconBrandFacebookFilled, IconBrandLinkedinFilled, IconBrandTwitterFilled, IconBrandYoutubeFilled } from '@tabler/icons-react';
 import Logo from './Logo';
 import { Link } from 'react-router-dom';
 
@@ -9,21 +10,26 @@ const Footer = () => {
           <div className="md:col-span-2 space-y-6">
             <Logo />
             <p className="text-muted-foreground max-w-xs">
-              Modern task management for teams that value clarity, focus, and results.
+              Transform your operations with intelligent chatbots, voice agents, and automated workflows. 
+          Let AI handle the routine while you focus on growth.
             </p>
             <div className="flex items-center gap-4">
               {/* External links or social profiles can still use <a> */}
               <a href="#" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
                 {/* Twitter icon */}
+                <IconBrandTwitterFilled/>
               </a>
               <a href="#" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
                 {/* LinkedIn icon */}
+                <IconBrandLinkedinFilled/>
               </a>
               <a href="#" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
                 {/* Facebook icon */}
+                <IconBrandFacebookFilled/>
               </a>
               <a href="#" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
                 {/* YouTube icon */}
+                <IconBrandYoutubeFilled/>
               </a>
             </div>
           </div>
